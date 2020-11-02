@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application1
+  template:
+    metadata:
+      labels:
+        app: application1
+    spec:
+      containers:
+        - name: application1
+          image: tsuribori/devops2020-application1:latest
+          imagePullPolicy: Always
