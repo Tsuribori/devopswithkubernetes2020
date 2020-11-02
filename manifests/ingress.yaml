@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dwk-material-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: rewrite
+  namespace: default
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: project1-svc
+          servicePort: 2345
+      - path: /pingpong
+        backend:
+          serviceName: pingpong-svc
+          servicePort: 2346
+
+          
