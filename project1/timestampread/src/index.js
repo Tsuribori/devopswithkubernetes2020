@@ -12,13 +12,27 @@ const outputHash = () => {
 };
 const outputPong = () => {
   let data = fs.readFileSync("/usr/src/app/files/pong.txt", "utf8");
-  return `Ping / Pongs: : ${data}`;
+  return `Ping / Pongs: ${data}`;
 };
 app.get("/", (req, res) => {
-  let output = outputHash() + "<br>" + outputPong();
+  let output = `${outputHash()}
+         <br>
+         ${outputPong()}
+         <br>
+         <img src="/animal.png">
+         <br>
+         <input type="text" max="140">
+         <input type="submit" value="Create Todo">
+         <ul>
+           <li>Todo 1</li>
+           <li>Todo 2</li>
+         </ul>`;
   res.send(output);
 });
 
+app.get("/animal.png", (req, res) => {
+  res.sendFile("/usr/src/app/files/animal.png");
+});
 app.listen("8080", () => {
   console.log("Server started in port 8080");
 });
