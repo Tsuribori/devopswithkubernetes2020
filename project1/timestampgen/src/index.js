@@ -5,11 +5,13 @@ const app = express();
 
 const outputTime = () => {
   const now = new Date();
-  fs.writeFile("/usr/src/app/files/timestamp.txt", now);
-  console.log(date);
+  fs.writeFileSync("/usr/src/app/files/timestamp.txt", now);
+  console.log(now);
 };
 
-app.listen("8080", () => {
-  console.log("Server started in port 8080");
-  setInterval(outputTime, 5000);
-});
+setInterval(outputTime, 5000);
+
+//app.listen("8081", () => {
+//  console.log("Server started in port 8081");
+//  setInterval(outputTime, 5000);
+//});

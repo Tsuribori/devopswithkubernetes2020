@@ -14,15 +14,18 @@ spec:
     spec:
       volumes:
         - name: shared-timestamp
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: project1-claim
       containers:
         - name: timestampgen
           image: tsuribori/dwk-timestampgen:latest
           volumeMounts:
           - name: shared-timestamp
             mountPath: /usr/src/app/files
+          imagePullPolicy: Always
         - name: timestampread
           image: tsuribori/dwk-timestampread:latest
           volumeMounts:
           - name: shared-timestamp
             mountPath: /usr/src/app/files
+          imagePullPolicy: Always

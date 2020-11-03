@@ -12,8 +12,15 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: shared-timestamp
+          persistentVolumeClaim:
+            claimName: project1-claim
       containers:
         - name: pingpong
           image: tsuribori/devops2020-pingpong:latest
+          volumeMounts:
+          - name: shared-timestamp
+            mountPath: /usr/src/app/files
           imagePullPolicy: Always
 
