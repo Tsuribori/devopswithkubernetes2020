@@ -12,8 +12,17 @@ spec:
       labels:
         app: project1
     spec:
+      volumes:
+        - name: shared-timestamp
+          emptyDir: {}
       containers:
-        - name: project1
-          image: tsuribori/devops2020-project:latest
-          imagePullPolicy: Always
-
+        - name: timestampgen
+          image: tsuribori/dwk-timestampgen:latest
+          volumeMounts:
+          - name: shared-timestamp
+            mountPath: /usr/src/app/files
+        - name: timestampread
+          image: tsuribori/dwk-timestampread:latest
+          volumeMounts:
+          - name: shared-timestamp
+            mountPath: /usr/src/app/files
