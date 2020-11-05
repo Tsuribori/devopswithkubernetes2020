@@ -1,23 +1,24 @@
 import express from "express";
 import fs from "fs";
+import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 
 const randString = uuidv4();
 
-const outputHash = () => {
-  let data = fs.readFileSync("/usr/src/app/files/timestamp.txt", "utf8");
-  return `${data}: ${randString}`;
+const outputHash = async () => {
+  let response = await axios.get("http://localhost:8081/time");
+  return `${response.data.time}: ${randString}`;
 };
-const outputPong = () => {
-  let data = fs.readFileSync("/usr/src/app/files/pong.txt", "utf8");
-  return `Ping / Pongs: ${data}`;
+const outputPong = async () => {
+  let response = await axios.get("http://pingpong-svc:2346/api/pong");
+  return `Ping / Pongs: ${response.data.pong}`;
 };
-app.get("/", (req, res) => {
-  let output = `${outputHash()}
+app.get("/", async (req, res) => {
+  let output = `${await outputHash()}
          <br>
-         ${outputPong()}
+         ${await outputPong()}
          <br>
          <img src="/animal.png">
          <br>
