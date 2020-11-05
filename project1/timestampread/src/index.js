@@ -15,6 +15,13 @@ const outputPong = async () => {
   let response = await axios.get("http://pingpong-svc:2346/api/pong");
   return `Ping / Pongs: ${response.data.pong}`;
 };
+
+const getTodos = async () => {
+  let response = await axios.get("http://backend-svc:2347/todo");
+  let todos = response.data.todos;
+  return `<ul>${todos.map((todo) => `<li>${todo}</li>`)}</ul>`;
+};
+
 app.get("/", async (req, res) => {
   let output = `${await outputHash()}
          <br>
@@ -22,12 +29,11 @@ app.get("/", async (req, res) => {
          <br>
          <img src="/animal.png">
          <br>
-         <input type="text" max="140">
+         <form action="/backend/todo" method="POST">
+         <input type="text" name="todo" max="140">
          <input type="submit" value="Create Todo">
-         <ul>
-           <li>Todo 1</li>
-           <li>Todo 2</li>
-         </ul>`;
+         </form>
+         ${await getTodos()}`;
   res.send(output);
 });
 
