@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: example-pv
+  namespace: dwk-namespace
 spec:
   capacity:
     storage: 500M

@@ -12,12 +12,14 @@ const outputHash = async () => {
   return `${response.data.time}: ${randString}`;
 };
 const outputPong = async () => {
-  let response = await axios.get("http://pingpong-svc:2346/api/pong");
+  let response = await axios.get(
+    "http://pingpong-svc.dwk-namespace:2346/api/pong"
+  );
   return `Ping / Pongs: ${response.data.pong}`;
 };
 
 const getTodos = async () => {
-  let response = await axios.get("http://backend-svc:2347/todo");
+  let response = await axios.get("http://backend-svc.dwk-namespace:2347/todo");
   let todos = response.data.todos;
   return `<ul>${todos.map((todo) => `<li>${todo}</li>`)}</ul>`;
 };
