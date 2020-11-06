@@ -29,4 +29,7 @@ spec:
           volumeMounts:
           - name: shared-timestamp
             mountPath: /usr/src/app/files
+          envFrom:
+            - configMapRef:
+                name: project1-configmap
           imagePullPolicy: Always

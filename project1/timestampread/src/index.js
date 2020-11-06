@@ -25,7 +25,10 @@ const getTodos = async () => {
 };
 
 app.get("/", async (req, res) => {
-  let output = `${await outputHash()}
+  let output = `
+         ${process.env.MESSAGE}
+         <br>
+         ${await outputHash()}
          <br>
          ${await outputPong()}
          <br>
