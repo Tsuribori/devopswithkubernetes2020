@@ -10,6 +10,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/pong", (req, res) => {
+  console.log(pong);
   res.json({ pong: pong });
   pong += 1;
 });

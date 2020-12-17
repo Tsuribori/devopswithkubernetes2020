@@ -12,9 +12,7 @@ const outputHash = async () => {
   return `${response.data.time}: ${randString}`;
 };
 const outputPong = async () => {
-  let response = await axios.get(
-    "http://pingpong-svc.dwk-namespace:2346/api/pong"
-  );
+  let response = await axios.get("http://pingpong-svc:2346/api/pong");
   return `Ping / Pongs: ${response.data.pong}`;
 };
 
